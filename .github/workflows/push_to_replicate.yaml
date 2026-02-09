@@ -3,39 +3,32 @@ name: Push to Replicate
 on:
   workflow_dispatch:
     inputs:
-      model:
-        description: "Replicate model (owner/model-name)"
+      model_name:
+        description: "Replicate model name (owner/model). 예: peachspace/peach-comfy-anime"
         required: true
-        default: "peachspace/peach-comfy-anime"
+        type: string
 
 jobs:
-  push:
+  push_to_replicate:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@v1.3.1
         with:
-          python-version: "3.12"
+          tool-cache: false
+          docker-images: false
 
-      - name: Install Cog
-        run: |
-          sudo curl -o /usr/local/bin/cog -L https://github.com/replicate/cog/releases/latest/download/cog_$(uname -s)_$(uname -m)
-          sudo chmod +x /usr/local/bin/cog
+      - name: Checkout (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
-      - name: Cog login
-        run: |
-          echo "${{ secrets.COG_TOKEN }}" | cog login --token-stdin
+      - name: Setup Cog (login)
+        uses: replicate/setup-cog@v2
+        with:
+          token: ${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}
 
-      - name: Install cog-safe-push
-        run: |
-          pip install git+https://github.com/replicate/cog-safe-push.git
-
-      - name: Push to Replicate (safe)
-        env:
-          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
-        run: |
-          cog-safe-push ${{ inputs.model }}
+      - name: Push to Replicate
+        run: cog push r8.im/${{ inputs.model_name }}
