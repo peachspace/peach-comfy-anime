@@ -1,5 +1,5 @@
 pydantic==1.10.26
-fastapi>=0.98.0
+fastapi==0.98.0
 tokenizers>=0.13.3
 sentencepiece
 safetensors>=0.4.2
@@ -29,7 +29,7 @@ pilgram
 scikit-learn
 rembg
 numba
-pandas
+pandas==2.2.3
 numexpr
 insightface
 onnx
@@ -40,7 +40,7 @@ timm
 importlib_metadata
 opencv-python-headless>=4.0.1.24
 filelock
-numpy>=1.25.0
+numpy==1.26.4
 scikit-image
 python-dateutil
 mediapipe
