@@ -19,8 +19,6 @@ comfyui-workflow-templates==0.2.4
 dill
 webcolors
 albumentations
-pydantic~=2.0
-pydantic-settings~=2.0
 cmake
 imageio
 joblib
