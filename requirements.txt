@@ -1,3 +1,5 @@
+pydantic<2
+fastapi>=0.98.0
 tokenizers>=0.13.3
 sentencepiece
 safetensors>=0.4.2
@@ -18,7 +20,7 @@ comfyui-frontend-package==1.28.8
 comfyui-workflow-templates==0.2.4
 dill
 webcolors
-albumentations
+albumentations<2
 cmake
 imageio
 joblib
