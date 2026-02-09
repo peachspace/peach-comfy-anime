@@ -1,15 +1,15 @@
 build:
   gpu: true
-  cuda: "12.6"
+  cuda: "11.8"
   system_packages:
     - ffmpeg
   python_version: "3.12"
+  python_requirements: requirements.txt
   run:
     - pip install -U pip
-    - pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu126
-    - pip install -r requirements.txt
+    - pip install torch==2.7.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
     - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/latest/download/pget_$(uname -s)_$(uname -m)" && chmod +x /usr/local/bin/pget
-    - pip install onnxruntime-gpu --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/
+    - pip install onnxruntime-gpu
 
 predict: "predict.py:Predictor"
 train: "train.py:train"
