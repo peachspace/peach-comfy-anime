@@ -4,14 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       model:
-        description: "Replicate model (r8.im/peachspace/peach-comfy-anime)"
+        description: "Replicate model (r8.im/<owner>/<name>)"
         required: true
-        default: "r8.im/peachspace/peach-comfy-anime>"
-
+        default: "r8.im/peachspace/peach-comfy-anime"  
 jobs:
   push:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
