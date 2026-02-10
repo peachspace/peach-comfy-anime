@@ -1,0 +1,25 @@
+name: Push to Replicate
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Replicate model (r8.im/peachspace/peach-comfy-anime)"
+        required: true
+        default: "r8.im/peachspace/peach-comfy-anime>"
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Cog (install + auth)
+        uses: replicate/setup-cog@v2
+        with:
+          token: ${{ secrets.REPLICATE_API_TOKEN }}
+
+      - name: Push model
+        run: cog push ${{ github.event.inputs.model }}
