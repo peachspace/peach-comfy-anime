@@ -1,5 +1,6 @@
-pydantic==1.10.26
-fastapi==0.98.0
+pydantic>=2.7,<3
+pydantic-settings>=2.0,<3
+fastapi>=0.110,<1
 tokenizers>=0.13.3
 sentencepiece
 safetensors>=0.4.2
